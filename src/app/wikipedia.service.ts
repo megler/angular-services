@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Pages } from './pages';
-import { map, pluck, tap } from 'rxjs/operators';
-import { query } from '@angular/animations';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +22,6 @@ export class WikipediaService {
       .get<Pages>('https://en.wikipedia.org/w/api.php', {
         params,
       })
-      .pipe(pluck('query', 'search'));
+      .pipe(map((x) => x.query.search));
   }
 }
